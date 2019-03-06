@@ -16,12 +16,4 @@ import { FoodService } from '../shared/food.service';
   ],
   declarations: [Tab2Page]
 })
-export class Tab2PageModule implements OnInit {
-  allFoodInFreezer: Food[] = [];
-
-  constructor(private foodService: FoodService) {}
-
-  ngOnInit() {
-    this.allFoodInFreezer = this.foodService.allFood;
-  }
-}
+export class Tab2PageModule {}
