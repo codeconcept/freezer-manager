@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Food } from './food.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
-  private _allFood = [];
+  private _allFood: Food[] = [];
 
   get allFood() {
     return this._allFood;
@@ -12,7 +13,7 @@ export class FoodService {
 
   constructor() { }
 
-  addFood(foodItem) {
+  addFood(foodItem: Food) {
     this._allFood = [foodItem, ...this._allFood];
   }
 }

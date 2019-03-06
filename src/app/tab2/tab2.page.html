@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      All food stored in freezer
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let foodItem of allFoodInFreezer">
+      <ion-label>
+        <h2>{{foodItem.foodName}}</h2>
+        <p>added on {{foodItem.datePlacedInFreezer}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

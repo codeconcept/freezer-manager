@@ -1,9 +1,11 @@
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
+import { Food } from '../shared/food.model';
+import { FoodService } from '../shared/food.service';
 
 @NgModule({
   imports: [
@@ -14,4 +16,12 @@ import { Tab2Page } from './tab2.page';
   ],
   declarations: [Tab2Page]
 })
-export class Tab2PageModule {}
+export class Tab2PageModule implements OnInit {
+  allFoodInFreezer: Food[] = [];
+
+  constructor(private foodService: FoodService) {}
+
+  ngOnInit() {
+    this.allFoodInFreezer = this.foodService.allFood;
+  }
+}
