@@ -10,6 +10,7 @@ import { FoodService } from './../shared/food.service';
 })
 export class Tab1Page implements OnInit {
   form: FormGroup;
+  isLoading = false;
 
   constructor(private foodService: FoodService) {}
 
@@ -25,8 +26,14 @@ export class Tab1Page implements OnInit {
   }
 
   add() {
-    this.foodService.addFood(this.form.value);
-    console.log(this.foodService.allFood);
-    this.form.reset();
+    this.isLoading = true;
+    this.foodService.addFood(this.form.value).then(data => {
+      this.isLoading = false;
+      console.log(data);
+      this.form.reset();
+    }).catch(err => {
+      this.isLoading = false;
+      console.error(err);
+    });
   }
 }

@@ -25,7 +25,7 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <ion-label>Date added in freezer</ion-label>
+                <ion-label position="floating">Date added in freezer</ion-label>
                 <ion-datetime display-format="YYYY MMMM DD" min="2019-03-01" formControlName="datePlacedInFreezer"></ion-datetime>
               </ion-item>
             </ion-col>
@@ -39,4 +39,7 @@
       </form>
     </ion-card-content>
   </ion-card>
+  <div *ngIf="isLoading" text-center>
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
 </ion-content>
