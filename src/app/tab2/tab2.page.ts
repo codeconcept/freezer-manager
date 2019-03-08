@@ -3,7 +3,8 @@ import { FoodService } from './../shared/food.service';
 import { Food } from '../shared/food.model';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { DocumentChangeAction } from '@angular/fire/firestore';
+import { ModalController } from '@ionic/angular';
+import { FoodEditPage } from '../food/food-edit/food-edit.page';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,7 @@ export class Tab2Page implements OnInit, OnDestroy {
   sub: Subscription;
   isLoading = false;
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService, private modalCtrl: ModalController) {}
 
   ngOnInit() {
     this.sub = this.foodService.allFood().subscribe(data => {
@@ -30,6 +31,11 @@ export class Tab2Page implements OnInit, OnDestroy {
 
   edit(id) {
     console.log('id', id);
+    this.modalCtrl
+      .create({ component: FoodEditPage, componentProps: { 'foodId' : id } })
+      .then(modal => {
+        modal.present();
+      });
   }
 
   delete(id) {

@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+<ion-title>Edit {{ foodItem?.foodName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="foodItem">
+    {{ foodItem | json }}
+  </div>
+  <ion-button (click)="goBack()">back</ion-button>
+</ion-content>
