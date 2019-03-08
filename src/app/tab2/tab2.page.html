@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>
       All food stored in freezer
+      <span *ngIf="isLoading">
+        <ion-spinner name="crescent" color="danger"></ion-spinner>
+      </span>
     </ion-title>
   </ion-toolbar>
 </ion-header>

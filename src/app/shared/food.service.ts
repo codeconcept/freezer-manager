@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Food } from './food.model';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +16,9 @@ export class FoodService {
 
   addFood(foodItem: Food): Promise<DocumentReference> {
     return this.afs.collection('freezer').add(foodItem);
+  }
+
+  deleteFood(id: string): Observable<any> {
+    return from(this.afs.doc(`freezer/${id}`).delete());
   }
 }

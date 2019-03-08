@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FoodService } from './../shared/food.service';
 import { Food } from '../shared/food.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { DocumentChangeAction } from '@angular/fire/firestore';
 
 @Component({
@@ -12,6 +13,7 @@ import { DocumentChangeAction } from '@angular/fire/firestore';
 export class Tab2Page implements OnInit, OnDestroy {
   allFoodInFreezer: Food[];
   sub: Subscription;
+  isLoading = false;
 
   constructor(private foodService: FoodService) {}
 
@@ -32,6 +34,18 @@ export class Tab2Page implements OnInit, OnDestroy {
 
   delete(id) {
     console.log('id', id);
+    this.isLoading = true;
+    this.foodService
+      .deleteFood(id)
+      .pipe(
+        take(1)
+      )
+      .subscribe(() => {
+        this.isLoading = false;
+      }, err => {
+        console.error(err);
+      });
+
   }
 
   ngOnDestroy() {
