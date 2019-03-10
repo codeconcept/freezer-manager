@@ -21,6 +21,18 @@
             </ion-col>
           </ion-row>
           <ion-row>
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">choose a category</ion-label>
+                <ion-select formControlName="category">
+                  <ion-select-option *ngFor="let category of allCategories" [value]="category.id">
+                    {{ category.name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+          <ion-row>
             <ion-col>
               <ion-item>
                 <ion-label position="floating">Date added in freezer</ion-label>

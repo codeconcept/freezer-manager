@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { FoodService } from './../shared/food.service';
+import { Category } from './../shared/category.model';
+import categories from '../shared/food-categories';
 
 @Component({
   selector: 'app-tab1',
@@ -11,12 +13,17 @@ import { FoodService } from './../shared/food.service';
 export class Tab1Page implements OnInit {
   form: FormGroup;
   isLoading = false;
+  allCategories: Category[] = [];
 
   constructor(private foodService: FoodService) {}
 
   ngOnInit() {
+    this.allCategories = categories;
     this.form = new FormGroup({
       foodName: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      category: new FormControl({
         validators: [Validators.required]
       }),
       datePlacedInFreezer: new FormControl(null, {
