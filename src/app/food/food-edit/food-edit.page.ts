@@ -3,7 +3,7 @@ import { Food } from 'src/app/shared/food.model';
 import { FoodService } from 'src/app/shared/food.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-food-edit',
@@ -31,8 +31,8 @@ export class FoodEditPage implements OnInit, OnDestroy {
 
   createForm() {
     this.form = this.fb.group({
-      foodName: new FormControl(this.foodItem.foodName),
-      datePlacedInFreezer: new FormControl(this.foodItem.datePlacedInFreezer),
+      foodName: new FormControl(this.foodItem.foodName, Validators.required),
+      datePlacedInFreezer: new FormControl(this.foodItem.datePlacedInFreezer, Validators.required),
     });
   }
 
