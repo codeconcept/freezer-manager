@@ -5,12 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="foodItem">
-    {{ foodItem | json }}
-  </div>
   <ion-card *ngIf="form">
     <ion-card-header>
-      <ion-card-title>Edit {{ foodItem?.foodName }}</ion-card-title>
+      <ion-card-title>Edit</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="form">
@@ -33,7 +30,7 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button (click)="update()" expand="full" [disabled]="!this.form.valid">update</ion-button>
+              <ion-button (click)="update()" expand="block" [disabled]="!this.form.valid" fill="outline">update</ion-button>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="isLoading">
@@ -45,5 +42,5 @@
       </form>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="goBack()">back</ion-button>
+  <ion-button (click)="goBack()" fill="outline">back</ion-button>
 </ion-content>

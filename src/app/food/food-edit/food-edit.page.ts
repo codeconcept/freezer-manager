@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Food } from 'src/app/shared/food.model';
 import { FoodService } from 'src/app/shared/food.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -17,7 +17,11 @@ export class FoodEditPage implements OnInit, OnDestroy {
   form: FormGroup;
   isLoading = false;
 
-  constructor(private foodService: FoodService, private modalCtrl: ModalController, private fb: FormBuilder) { }
+  constructor(
+    private foodService: FoodService,
+    private modalCtrl: ModalController,
+    private fb: FormBuilder,
+    private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.sub = this.foodService.getFood(this.foodId).subscribe(data => {
@@ -42,6 +46,23 @@ export class FoodEditPage implements OnInit, OnDestroy {
     const updatedFood = {...this.form.value, id: this.foodItem.id};
     this.foodService.updateFood(updatedFood).subscribe(() => {
       this.isLoading = false;
+      this.toastCtrl.create({
+        message: 'update is successful',
+        duration: 2000,
+        color: 'primary',
+        position: 'top'
+      }).then(toast => {
+        toast.present();
+      });
+    }, err => {
+        this.toastCtrl.create({
+          message: 'update failed',
+          duration: 2000,
+          color: 'danger',
+          position: 'top'
+        }).then(toast => {
+          toast.present();
+        });
     });
   }
 
