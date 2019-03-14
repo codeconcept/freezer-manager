@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-Food frozen more than {{nbOfDaysAgo}} day{{nbOfDaysAgo === 1 ? '' : 's'}} ago
+      More than {{nbOfDaysAgo}} day{{nbOfDaysAgo === 1 ? '' : 's'}} in freezer
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@ Food frozen more than {{nbOfDaysAgo}} day{{nbOfDaysAgo === 1 ? '' : 's'}} ago
     <ion-item *ngFor="let foodItem of allFoodToEatSoon">
       <ion-label>
         <h2>{{foodItem.foodName}}</h2>
-        <p>added on {{foodItem.datePlacedInFreezer}}</p>
+        <p>added on {{foodItem.datePlacedInFreezer | date}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
