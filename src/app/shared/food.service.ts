@@ -19,6 +19,7 @@ export class FoodService {
   }
 
   addFood(foodItem: Food): Promise<DocumentReference> {
+    console.log('foodItem', foodItem);
     return this.afs.collection('freezer').add(foodItem);
   }
 

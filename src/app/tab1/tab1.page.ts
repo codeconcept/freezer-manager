@@ -34,7 +34,8 @@ export class Tab1Page implements OnInit {
 
   add() {
     this.isLoading = true;
-    this.foodService.addFood(this.form.value).then(data => {
+    const foodItem = { foodName: this.form.value.foodName, datePlacedInFreezer: new Date(this.form.value.datePlacedInFreezer) };
+    this.foodService.addFood(foodItem).then(data => {
       this.isLoading = false;
       console.log(data);
       this.form.reset();
