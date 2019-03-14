@@ -30,4 +30,12 @@ export class FoodService {
   deleteFood(id: string): Observable<any> {
     return from(this.afs.doc(`freezer/${id}`).delete());
   }
+
+  getFoodFrozenDaysAgo(nbOfDaysInFreezer: number): Observable<Food[]> {
+    const daysInMilliseconds = nbOfDaysInFreezer * 24 * 3600 * 1000;
+    const dateInPast = new Date(Date.now() - daysInMilliseconds);
+    return this.afs
+      .collection('freezer', ref => ref.where('datePlacedInFreezer', '<', dateInPast))
+      .valueChanges() as Observable<Food[]>;
+  }
 }
